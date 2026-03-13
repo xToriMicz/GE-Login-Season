@@ -738,8 +738,13 @@ class MainWindow:
                 self._log_append(f"[Update] Fetch failed: {fetch_result.stderr.strip()}\n")
                 messagebox.showerror("Update", "ไม่สามารถเชื่อมต่อ GitHub ได้\nตรวจสอบอินเทอร์เน็ต", parent=self.root)
                 return
-            # Reset to match remote — ไม่กระทบไฟล์ user (account .txt, cookies ถูก gitignore)
+            # Stage ไฟล์ทั้งหมดก่อน reset — แก้ bug "untracked files would be overwritten"
+            # เพราะ git init สร้าง repo ว่าง (ไม่มี commit) → reset เฉยๆ จะไม่ track ไฟล์
+            # ต้อง add ก่อนเพื่อให้ git รู้จักไฟล์ แล้ว reset จะ sync index กับ remote
+            subprocess.run(["git", "add", "-A"], capture_output=True, cwd=PROJECT_ROOT)
             subprocess.run(["git", "reset", "--mixed", f"origin/{BRANCH}"], capture_output=True, cwd=PROJECT_ROOT)
+            # Set upstream tracking
+            subprocess.run(["git", "branch", f"--set-upstream-to=origin/{BRANCH}", BRANCH], capture_output=True, cwd=PROJECT_ROOT)
             self._log_append("[Update] Git ตั้งค่าเรียบร้อย!\n")
         else:
             # Ensure remote URL is correct (อาจ clone มาจาก repo เก่า)
