@@ -1,0 +1,17 @@
+# Proxy List for GE Login Bot
+# 1 proxy per line
+# Supported formats:
+#   host:port                    (HTTP proxy, no auth)
+#   user:pass@host:port          (HTTP proxy with auth)
+#   socks5://host:port           (SOCKS5 proxy)
+#   socks5://user:pass@host:port (SOCKS5 proxy with auth)
+#
+# Tips:
+# - Use Thai residential proxies for best results (ge.exe.in.th is Thai server)
+# - Each parallel worker gets assigned a proxy round-robin
+# - Lines starting with # are ignored
+#
+# Example:
+# 203.150.100.1:8080
+# user:pass@proxy-th.example.com:3128
+# socks5://103.42.57.1:1080

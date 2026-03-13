@@ -1,0 +1,46 @@
+# Credentials & account files - NEVER commit
+# All .txt except requirements.txt (user may name account files anything)
+*.txt
+!requirements.txt
+cookies.json
+
+# UI settings (machine-specific)
+ui_settings.json
+
+# Browser profiles (large, machine-specific)
+.chrome_profile/
+.chrome_sandbox/
+.chrome_parallel/
+.chrome_debug/
+.chrome_debug*/
+.browsers_installed
+
+# Runtime output
+screenshots/
+reports/
+logs.txt
+debug_redeem_*.png
+.preview/
+.progress.json
+.retry_accounts.txt
+
+# Agent config (machine-specific)
+.agent/
+.claude/
+
+# Python
+__pycache__/
+.venv/
+venv/
+*.pyc
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+
+# Images (user screenshots, not code)
+*.png
+*.PNG
+*.jpg
+*.jpeg
